@@ -1,0 +1,16 @@
+[
+{
+  "modid": "ingameoverlay",
+  "name": "In game Overlay",
+  "description": "Mod to display certain Informations inGame.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Maefvfis","StrikerBAY"],
+  "credits": "This Mod is made by:",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
