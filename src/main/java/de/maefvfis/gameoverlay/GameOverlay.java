@@ -9,6 +9,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import de.maefvfis.gameoverlay.client.handler.GuiOpenHandler;
 import de.maefvfis.gameoverlay.client.handler.KeyInputEventHandler;
+import de.maefvfis.gameoverlay.client.handler.LightOverlayHandler;
 import de.maefvfis.gameoverlay.client.handler.MainTick;
 import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
 import de.maefvfis.gameoverlay.proxy.IProxy;
@@ -37,6 +38,7 @@ public class GameOverlay {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
+        MinecraftForge.EVENT_BUS.register(new LightOverlayHandler());
         LogHelper.info("INIT ist durch .........................................");
     }
 
