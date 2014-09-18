@@ -22,11 +22,7 @@ public class MainTick {
 		if (mc.gameSettings.showDebugInfo || !mc.inGameHasFocus)
 			return;
 		
-        // Render Mob Grid
-		if(ConfigurationHandler.myConfigShowGrid == true) {
-			new EntityGrid(Integer.valueOf(ConfigurationHandler.myGridSize));
-		}
-		
+
 		// Render Chunk Info In game
 		if(ConfigurationHandler.myConfigShowInfoIngameGui == true) {
 			new InfoIngameGui();
@@ -36,5 +32,11 @@ public class MainTick {
 		if(ConfigurationHandler.myConfigShowItemUsage == true) {
 			new ShowItemUsage();
 		}
+		
+        // Render Mob Grid
+		if(ConfigurationHandler.myConfigShowGrid == true) {
+			//new EntityGrid(Integer.valueOf(ConfigurationHandler.myGridSize));
+		}
 	}
+
 }

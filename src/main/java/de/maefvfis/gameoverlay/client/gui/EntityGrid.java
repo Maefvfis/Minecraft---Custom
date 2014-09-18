@@ -6,10 +6,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import sun.security.ssl.Debug;
 import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -19,7 +22,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.chunk.Chunk;
 import de.maefvfis.gameoverlay.objects.Output;
-public class EntityGrid {
+public class EntityGrid extends GuiScreen {
 	
 	public int[][] result;
 	public int GridSize;
@@ -146,6 +149,25 @@ public class EntityGrid {
 		}
 		String lookchar = String.valueOf(Character.toChars(Integer.parseInt(looking, 16)));
 		fontRender.drawString(lookchar, k - (((GridSize / 2)+1)*gridchar_width) + (gridchar_width / 2) - 2 - 1, 1 + ((GridSize / 2)*gridchar_width), 0xFFFFFF);
+		
+		
+		
+		
+		
+		//
+		int screenwidth = scaledresolution.getScaledWidth();
+		int screenheight = scaledresolution.getScaledHeight();
+	    GL11.glTranslatef(0, 100, 0);
+	    GL11.glRotatef(this.mc.thePlayer.rotationYaw, 0, 0, 1);
+	    drawRect(0, 0, 50, 50, 0xAA000000);
+	    drawRect(0, 50,50, 100, 0xAA000000);   
+
+	    GL11.glRotatef(0, 0, 0, 0);
+		
+		
+	    
+	    GL11.glTranslatef(0, -100, 0);
+	    GL11.glRotatef(-this.mc.thePlayer.rotationYaw, 0, 0, 1);
 		
 	}
 	

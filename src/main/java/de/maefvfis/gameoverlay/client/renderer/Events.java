@@ -98,7 +98,7 @@ public class Events {
 		}
 
 		Chunk chunk = Minecraft.getMinecraft().theWorld.getChunkFromBlockCoords(x, z);
-		if(chunk.getSavedLightValue(EnumSkyBlock.Block, x & 15, y, z & 15) > 8) {
+		if(chunk.getSavedLightValue(EnumSkyBlock.Block, x & 15, y+1, z & 15) >= 8) {
 			return false;
 		}
 
