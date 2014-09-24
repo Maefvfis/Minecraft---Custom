@@ -3,36 +3,20 @@ package de.maefvfis.gameoverlay.objects;
 import sun.security.ssl.Debug;
 
 public class DayTime {
-	public static String getTimeString(Long Time) {
+	public static String getTimeString(Long ltime) {
 		
-		Time = Time + 6000;
-		// Kade ist eine Hure
-		//Time = Time + 8000;
-		
-		int Stunden;
-		int Minuten;
-
 		String returnStunden;
 		String returnMinuten;
 		
-		while (Time > 24000) {
-			Time = Time - 24000;
-		}
-
-		Stunden = (int)(Time / 1000);
-		Minuten = (int)(((Time - (Stunden * 1000)) * 60) / 1000);
+		int Stunden = (int) (((ltime + 6000) % 24000) / 1000);
+		int Minuten = (int) ((((ltime + 6000) % 24000) % 1000) * 6 / 100);
 		
-		if(Stunden < 10) {
-			returnStunden = "0" + String.valueOf(Stunden);
-		} else {
-			returnStunden = String.valueOf(Stunden);
-		}
+		returnStunden = "0" + String.valueOf(Stunden);
+		returnStunden = returnStunden.substring(returnStunden.length() - 2, returnStunden.length());
 		
-		if(Minuten < 10) {
-			returnMinuten = "0" + String.valueOf(Minuten);
-		} else {
-			returnMinuten = String.valueOf(Minuten);
-		}
+		returnMinuten = "0" + String.valueOf(Minuten);
+		returnMinuten = returnMinuten.substring(returnMinuten.length() - 2, returnMinuten.length());
+		
 		
 		return returnStunden + ":" + returnMinuten + " Uhr";
 		

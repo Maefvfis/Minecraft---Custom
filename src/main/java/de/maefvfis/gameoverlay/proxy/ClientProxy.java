@@ -14,6 +14,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerKeyBindings() {
         ClientRegistry.registerKeyBinding(Keybindings.menu);
+        ClientRegistry.registerKeyBinding(Keybindings.creativinv);
         MinecraftForge.EVENT_BUS.register(new Renderer(Minecraft.getMinecraft()));
         FMLCommonHandler.instance().bus().register(new Events());
     }

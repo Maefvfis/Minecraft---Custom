@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
 import de.maefvfis.gameoverlay.objects.Output;
+import de.maefvfis.gameoverlay.reference.EntityGridOptions;
 import sun.security.ssl.Debug;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
@@ -35,6 +36,9 @@ public class Grid2D  extends GuiScreen {
 	}
 	
 	public void st() {
+		
+		
+		
 		
 		mc = mc.getMinecraft();
 		ScaledResolution scaledresolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
@@ -72,35 +76,19 @@ public class Grid2D  extends GuiScreen {
 		
 		
 	    GL11.glScalef(0.5F,0.5F,0.5F);
-	    
-	    
-	    
 	    for (int i1 = 0; i1 <= gridsize; i1++)
 		{
 			for (int i2 = 0; i2 <= gridsize; i2++)
 			{
 				EntityCount = 0;
 				chunk = mc.theWorld.getChunkFromBlockCoords(X + this.XOffset(i1), Z + this.ZOffset(i2));
+			
+				EntityCount = CViewer.countEntity(EntityGridOptions.ActiveEntity.EntityClass, chunk, EntityGridOptions.ActiveEntity.WitherSkelett);
+				player_names.addAll(CViewer.ListPlayers(chunk));
 				
-				if(ConfigurationHandler.myConfigGridType.equals("Witherskeletts")) {
-					EntityCount = CViewer.countEntity(EntitySkeleton.class, chunk, true);
-				} else if(ConfigurationHandler.myConfigGridType.equals("Mobs")) {
-					EntityCount = CViewer.countEntity(EntityMob.class, chunk);
-				} else if(ConfigurationHandler.myConfigGridType.equals("Animals")) {
-					EntityCount = CViewer.countEntity(EntityAnimal.class, chunk);
-				} else if(ConfigurationHandler.myConfigGridType.equals("Slimes")) {
-					EntityCount = CViewer.countEntity(EntitySlime.class, chunk);
-				} else if(ConfigurationHandler.myConfigGridType.equals("Players")) {
-					EntityCount = CViewer.countEntity(EntityPlayer.class, chunk);
-					player_names.addAll(CViewer.ListPlayers(chunk));
-				}
-				
-				
-				tempcolor = 0;
 				tempcolor = 0x002200 * EntityCount;
 
 				if(EntityCount == 0) {
-					//tempcolor = 0x1c73c4;
 				} else if(EntityCount <= 5){
 					tempcolor = 0xdab900;
 				} else if(EntityCount > 5){
@@ -119,14 +107,8 @@ public class Grid2D  extends GuiScreen {
 	    mc.renderEngine.bindTexture(new ResourceLocation("gameoverlay","textures/map.png"));
 	    drawTexturedModalRect(-128, -128, 0, 0, 256, 256);
 	    GL11.glScalef(4.0F,4.0F,4.0F);
-	    //GL11.glDisable(GL11.GL_BLEND);
-	    
-	    //drawRect(0, 0, 50, 50, 0xAA000000);
-	    //drawRect(0, 51,50, 101, 0xAA000000);   
 
-	    GL11.glRotatef(0, 0, 0, 0);
 	    
-	    //
 	    GL11.glRotatef(this.mc.thePlayer.rotationYaw - 180, 0, 0, 1);
 	    
 	    
@@ -136,6 +118,7 @@ public class Grid2D  extends GuiScreen {
 	    mc.renderEngine.bindTexture(new ResourceLocation("gameoverlay","textures/map_arrow.png"));
 	    drawTexturedModalRect(-130, -130, 0, 0, 256, 256);
 	    GL11.glScalef(16.0F,16.0F,16.0F);
+	    
 	    GL11.glTranslatef(-transfX, -transfY, 0);
 	    
 	    chunk = mc.theWorld.getChunkFromBlockCoords(X, Z);
@@ -145,38 +128,27 @@ public class Grid2D  extends GuiScreen {
 	    List whitelist = Arrays.asList(ConfigurationHandler.PlayerGridWhitelist.split(","));
 	    
 	    
-	    
+	    if(!EntityGridOptions.ActiveEntity.EntityName.equals("Players")) {
+	    	EntityList = CViewer.ListEntity(EntityGridOptions.ActiveEntity.EntityClass, chunk, EntityGridOptions.ActiveEntity.WitherSkelett);
+	    }
 
-	    
-	    if(ConfigurationHandler.myConfigShowEntityPosition) {
-			if(ConfigurationHandler.myConfigGridType.equals("Witherskeletts")) {
-				EntityList = CViewer.ListEntity(EntitySkeleton.class, chunk, true);
-			} else if(ConfigurationHandler.myConfigGridType.equals("Mobs")) {
-				EntityList = CViewer.ListEntity(EntityMob.class, chunk);
-			} else if(ConfigurationHandler.myConfigGridType.equals("Animals")) {
-				EntityList = CViewer.ListEntity(EntityAnimal.class, chunk);
-			} else if(ConfigurationHandler.myConfigGridType.equals("Slimes")) {
-				EntityList = CViewer.ListEntity(EntitySlime.class, chunk);
-			}
-		}
 		
 	    GL11.glScalef(0.75F,0.75F,0.75F);
 		Output OutputString;
 		
 		
-	    if(ConfigurationHandler.myConfigGridType == "Players") {
+	    if(EntityGridOptions.ActiveEntity.EntityName.equals("Players") && ConfigurationHandler.myConfigShowEntityPosition) {
 			Collections.sort(player_names);
 			for(int i = 0; i < player_names.size(); i++) {
 				
 				if(!whitelist.contains(player_names.get(i))) {
 					fontRender.drawStringWithShadow((String) player_names.get(i),(int) (k * 1.3) - fontRender.getStringWidth((String) player_names.get(i)) - 2, current_y_playerlist, 0xffffff);
 					current_y_playerlist += 10;
-					Debug.println("", "Blubb");
 				}
 			}
 		}
 		
-		if(!ConfigurationHandler.myConfigGridType.equals("Players")) {
+		if(!EntityGridOptions.ActiveEntity.EntityName.equals("Players") && ConfigurationHandler.myConfigShowEntityPosition) {
 			Collections.sort(EntityList);
 			
 			for(int i = 0; i < EntityList.size(); i++) {
@@ -187,8 +159,7 @@ public class Grid2D  extends GuiScreen {
 			
 		}
 		GL11.glScalef(1.35F,1.35F,1.35F);
-	    
-	    
+		
 	}
 	
 	public int ZOffset(int count) {

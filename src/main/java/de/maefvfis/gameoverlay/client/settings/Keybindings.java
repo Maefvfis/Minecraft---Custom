@@ -7,4 +7,5 @@ import org.lwjgl.input.Keyboard;
 
 public class Keybindings {
     public static KeyBinding menu = new KeyBinding(Names.Keys.MENU, Keyboard.KEY_K, Names.Keys.CATEGORY);
+    public static KeyBinding creativinv = new KeyBinding(Names.Keys.CREATIVEINV, Keyboard.KEY_L, Names.Keys.CATEGORY);
 }

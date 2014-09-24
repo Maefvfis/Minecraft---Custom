@@ -4,6 +4,7 @@ import cpw.mods.fml.client.config.GuiConfigEntries.IConfigEntry;
 import cpw.mods.fml.client.config.GuiConfigEntries.NumberSliderEntry;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import de.maefvfis.gameoverlay.reference.EntityGridOptions;
 import de.maefvfis.gameoverlay.reference.Reference;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
@@ -11,6 +12,8 @@ import net.minecraftforge.common.config.Property;
 import java.io.File;
 
 import org.lwjgl.opengl.GL11;
+
+import sun.security.ssl.Debug;
 
 public class ConfigurationHandler {
 
@@ -94,12 +97,14 @@ public class ConfigurationHandler {
     
     public static void init(File configFile)
     {
+    	
         // Create the configuration object from the given configuration file
         if (configuration == null)
         {
             configuration = new Configuration(configFile);
             loadConfiguration();
         }
+        EntityGridOptions.init();
     }
 
     private static void loadConfiguration()
@@ -110,7 +115,7 @@ public class ConfigurationHandler {
         myConfigShowEntityPosition = configuration.getBoolean("Show Etity Position", Configuration.CATEGORY_GENERAL, myConfigShowEntityPosition, "If true: Shows the position of Etitys");
         
         myGridSize = configuration.getString("Grid size", Configuration.CATEGORY_GENERAL, myGridSize, "Sets the size of the grid",new String[] { "4", "6", "8", "10"});
-        myConfigGridType = configuration.getString("Grid type", Configuration.CATEGORY_GENERAL, myConfigGridType, "Sets the color of the grid",new String[] { "Mobs", "Animals", "Slimes", "Players", "Witherskeletts" });
+        myConfigGridType = configuration.getString("Grid type", Configuration.CATEGORY_GENERAL, myConfigGridType, "Sets the color of the grid",EntityGridOptions.MobStrings);
         myConfigGridColor = configuration.get(Configuration.CATEGORY_GENERAL, "Grid transparency", myConfigGridColor,"Grid transparency", 1, 100 ).setConfigEntryClass(getSliderClass()).getInt();
         PlayerGridWhitelist = configuration.getString("Grid ignore player", Configuration.CATEGORY_GENERAL, PlayerGridWhitelist, "Players in this list will not be shown. Seperate by ','");
         
@@ -131,8 +136,10 @@ public class ConfigurationHandler {
     @SubscribeEvent
     public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
     {
-        if (event.modID.equalsIgnoreCase(Reference.MOD_ID))
+        if (event.modID.equalsIgnoreCase(Reference.MOD_ID)) {
             loadConfiguration();
+        	EntityGridOptions.SetActiveEntity(this.myConfigGridType);
+        }
     }
 
 }

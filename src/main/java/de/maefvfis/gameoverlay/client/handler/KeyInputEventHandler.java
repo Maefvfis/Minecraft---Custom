@@ -4,6 +4,7 @@ package de.maefvfis.gameoverlay.client.handler;
 import net.minecraft.client.Minecraft;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
+import de.maefvfis.gameoverlay.client.gui.CreativeInv;
 import de.maefvfis.gameoverlay.client.gui.GuiChatCustom;
 import de.maefvfis.gameoverlay.client.gui.ModGuiConfig;
 import de.maefvfis.gameoverlay.client.settings.Keybindings;
@@ -19,6 +20,12 @@ public class KeyInputEventHandler {
         	Minecraft  mc = Minecraft.getMinecraft();
             mc.displayGuiScreen(new ModGuiConfig(mc.currentScreen));
             return Key.MENU;
+        }
+        if (Keybindings.creativinv.isPressed())
+        {
+        	Minecraft  mc = Minecraft.getMinecraft();
+            mc.displayGuiScreen(new CreativeInv(Minecraft.getMinecraft().thePlayer));
+            return Key.CREATIVEINV;
         }
         return Key.UNKNOWN;
     }

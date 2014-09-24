@@ -33,7 +33,7 @@ public class ShowItemUsage {
 				if (usesLeft < 15)
 					color = alertColor;
 				
-				mc.fontRenderer.drawStringWithShadow("Item uses left: " + Integer.valueOf(usesLeft), 5, yPos - 10, color);
+				mc.fontRenderer.drawStringWithShadow("Item uses left: " + Integer.valueOf(usesLeft), 5, yPos - 15, color);
 			}
 			
 		}
