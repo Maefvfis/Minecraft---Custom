@@ -6,7 +6,9 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.relauncher.Side;
+import de.maefvfis.gameoverlay.client.gui.CopyOfGrid2D;
 import de.maefvfis.gameoverlay.client.gui.EntityGrid;
+import de.maefvfis.gameoverlay.client.gui.Grid2D;
 import de.maefvfis.gameoverlay.client.gui.InfoIngameGui;
 import de.maefvfis.gameoverlay.client.gui.ShowItemUsage;
 import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
@@ -35,7 +37,7 @@ public class MainTick {
 		
         // Render Mob Grid
 		if(ConfigurationHandler.myConfigShowGrid == true) {
-			//new EntityGrid(Integer.valueOf(ConfigurationHandler.myGridSize));
+			new CopyOfGrid2D();
 		}
 	}
 

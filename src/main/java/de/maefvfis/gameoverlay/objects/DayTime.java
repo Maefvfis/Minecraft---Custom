@@ -18,7 +18,7 @@ public class DayTime {
 		returnMinuten = returnMinuten.substring(returnMinuten.length() - 2, returnMinuten.length());
 		
 		
-		return returnStunden + ":" + returnMinuten + " Uhr";
+		return returnStunden + ":" + returnMinuten;
 		
 	}
 }

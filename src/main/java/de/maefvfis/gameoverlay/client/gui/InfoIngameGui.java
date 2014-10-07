@@ -55,7 +55,7 @@ public class InfoIngameGui extends GuiScreen {
 	
 	public InfoIngameGui() {
 		
-		GL11.glScalef(0.75F,0.75F,0.75F);
+		//GL11.glScalef(0.8F,0.8F,0.8F);
 		
 		FontRenderer fontRender =  mc.fontRenderer;
 		ChunckViewer CViewer = new ChunckViewer();
@@ -82,44 +82,31 @@ public class InfoIngameGui extends GuiScreen {
 		String[] splits = mc.debug.split(",");
 		fontRender.drawStringWithShadow(splits[0], 5, currentY,0xffffff);
 		currentY += 10;
-		// Zeiten#
-		//worldInfo.this
-		
-		//fontRender.drawStringWithShadow(DayTime.getTimeString(Minecraft.getMinecraft().theWorld.getWorldInfo().getWorldTime()) + " | " + Mondphasen.getPhase(Minecraft.getMinecraft().theWorld.getMoonPhase()),5, currentY, 0xffffff);
-		
-		
-		GL11.glScalef(1.25F,1.25F,1.25F);
+
 		
 		
 		 //draw your Gui here, only thing you need to change is the path
 	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	    GL11.glScalef(0.5F,0.5F,0.5F);
-	    mc.renderEngine.bindTexture(new ResourceLocation("gameoverlay","textures/clock_bg.png"));
 	    
-	    //mc.renderEngine.
-	    //mc.renderGlobal.d
-	    //drawTexturedModalRect(200, 200, 0, 0, 200, 200);
-	    //drawRect(200, 200, 0, 0, 0x10000000);
-	    //this.mc.getTextureManager().bindTexture(pageTextures);
-	    //drawRect((screenwidth / 2)-35, 5, (screenwidth / 2)+35, 45, 0xAA000000);
-	    drawTexturedModalRect(screenwidth - 50 , 5, 0, 0, 140, 80);
-		
+	    
+	    
+	    
+	    
 	    mc.renderEngine.bindTexture(new ResourceLocation("gameoverlay","textures/moon_phases.png"));
-	    
+	    drawTexturedModalRect((screenwidth / 2) - 45 , 5, 0, 400, 90, 40);
 	    int[] MoonTextOff = Mondphasen.getPhase_iconoffset(Minecraft.getMinecraft().theWorld.getMoonPhase());
-	    drawTexturedModalRect(screenwidth - 45 , 10, MoonTextOff[0] / 2, MoonTextOff[1] / 2, 50, 50);
+	    drawTexturedModalRect((screenwidth / 2) + 21 , 7, MoonTextOff[0] / 2, MoonTextOff[1] / 2, 50, 50);
 	    
+	    int weatheroffset = 0;
 	    
-	    GL11.glScalef(2.0F,2.0F,2.0F);
-	    GL11.glScalef(0.75F,0.75F,0.75F);
-	    
-		
-	    
-	    
-	    
-	    fontRender.drawStringWithShadow(DayTime.getTimeString(Minecraft.getMinecraft().theWorld.getWorldInfo().getWorldTime()),(int) ((screenwidth / 1.41) - fontRender.getStringWidth(DayTime.getTimeString(Minecraft.getMinecraft().theWorld.getWorldInfo().getWorldTime())) / 2), 10, 0xffffff);
-		
-	    GL11.glScalef(1.42F,1.42F,1.42F);
+	    if(mc.theWorld.getWorldInfo().isThundering()) {
+	    	weatheroffset = 96;
+	    } else if (mc.theWorld.getWorldInfo().isRaining()) {
+	    	weatheroffset = 96 * 2;
+	    }
+	    drawTexturedModalRect((screenwidth / 2) - 43 , 7, weatheroffset / 2, (96*2) / 2, 50, 50);
+
+	    fontRender.drawString(DayTime.getTimeString(Minecraft.getMinecraft().theWorld.getWorldInfo().getWorldTime()),(int) (((screenwidth / 2) - fontRender.getStringWidth(DayTime.getTimeString(Minecraft.getMinecraft().theWorld.getWorldInfo().getWorldTime())) / 2)) + 3, 14, 0xffffff);
 
 
 	}

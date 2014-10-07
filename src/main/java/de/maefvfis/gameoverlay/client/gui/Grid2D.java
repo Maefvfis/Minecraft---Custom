@@ -133,7 +133,7 @@ public class Grid2D  extends GuiScreen {
 	    }
 
 		
-	    GL11.glScalef(0.75F,0.75F,0.75F);
+	    GL11.glScalef(0.8F,0.8F,0.8F);
 		Output OutputString;
 		
 		
@@ -142,7 +142,7 @@ public class Grid2D  extends GuiScreen {
 			for(int i = 0; i < player_names.size(); i++) {
 				
 				if(!whitelist.contains(player_names.get(i))) {
-					fontRender.drawStringWithShadow((String) player_names.get(i),(int) (k * 1.3) - fontRender.getStringWidth((String) player_names.get(i)) - 2, current_y_playerlist, 0xffffff);
+					fontRender.drawStringWithShadow((String) player_names.get(i),(int) (k * 1.25) - fontRender.getStringWidth((String) player_names.get(i)) - 2, current_y_playerlist, 0xffffff);
 					current_y_playerlist += 10;
 				}
 			}
@@ -153,12 +153,12 @@ public class Grid2D  extends GuiScreen {
 			
 			for(int i = 0; i < EntityList.size(); i++) {
 				OutputString = EntityList.get(i);
-				fontRender.drawStringWithShadow(OutputString.get_coordinaten(),(int) (k * 1.3) - fontRender.getStringWidth(OutputString.get_coordinaten()) - 2, current_y_playerlist, 0xffffff);
+				fontRender.drawStringWithShadow(OutputString.get_coordinaten(),(int) (k * 1.25) - fontRender.getStringWidth(OutputString.get_coordinaten()) - 2, current_y_playerlist, 0xffffff);
 				current_y_playerlist += 10;
 			}
 			
 		}
-		GL11.glScalef(1.35F,1.35F,1.35F);
+		GL11.glScalef(1.25F,1.25F,1.25F);
 		
 	}
 	

@@ -13,7 +13,7 @@ public class GridHandler {
 	public void onRender(RenderGameOverlayEvent.Text event) {
         // Render Mob Grid
 		if(ConfigurationHandler.myConfigShowGrid == true) {
-			new Grid2D(Integer.valueOf(ConfigurationHandler.myGridSize));
+			//new Grid2D(Integer.valueOf(ConfigurationHandler.myGridSize));
 			
 		}
 	}

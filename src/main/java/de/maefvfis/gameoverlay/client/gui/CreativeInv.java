@@ -109,7 +109,7 @@ public class CreativeInv extends GuiContainer
 	    	if(p_146984_1_ != null && p_146984_1_.getHasStack()) {
 	
 	    		
-	    		ItemStack itemstack = p_146984_1_.decrStackSize(p_146984_3_ == 0 ? 1 : p_146984_1_.getStack().getMaxStackSize());
+	    		ItemStack itemstack = p_146984_1_.getStack();
 	    		ItemStack itemstack2;
 	    		
 	    		List recipes = CustomCraftingManager.getInstance().getRecipeList();
@@ -119,12 +119,12 @@ public class CreativeInv extends GuiContainer
 	                IRecipe irecipe = (IRecipe)recipes.get(j);
 	                itemstack2 = irecipe.getRecipeOutput();
 	                if(itemstack2 != null) {
-		                if(itemstack2.getItem() == itemstack.getItem()) {
+		                if(itemstack2.getItem() == itemstack.getItem() && itemstack.getItemDamage() == itemstack2.getItemDamage()) {
 		                	
 		                	ItemStack[][] RezeptAr = irecipe.getRecipe(itemstack2);
 		                	
 		                	
-		                	Debug.println(irecipe.getClass().getName(),irecipe.getClass().getName());
+		                	Debug.println(irecipe.getClass().getName(),irecipe.getClass().getName() + " " + itemstack2.getItemDamage());
 		                	
 		                	
 		                	if(irecipe.getRecipe(itemstack2) != null) {
@@ -135,7 +135,7 @@ public class CreativeInv extends GuiContainer
 		                				recipefield.setInventorySlotContents((i * 3) + ii, null);
 		                				ItemStack Rezeptitem = RezeptAr[i][ii];
 		                				if(Rezeptitem != null) {
-		                					Debug.println(i + "/" + ii, Rezeptitem.getDisplayName()+"");
+		                					Debug.println(i + "/" + ii, Rezeptitem.getDisplayName()+ " " +Rezeptitem.getItemDamage());
 		                					Rezeptitem.stackSize = 1;
 		                					recipefield.setInventorySlotContents((i * 3) + ii, Rezeptitem);
 		                					
