@@ -56,7 +56,9 @@ public class GuiChatCustom extends GuiChat
     private String defaultInputFieldText = "";
     private static final String __OBFID = "CL_00000682";
 
-
+    public void setinputfield(String input) {
+    	this.inputField.setText(input);
+    }
 	@Override
     protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {

@@ -7,6 +7,7 @@ import cpw.mods.fml.common.gameevent.InputEvent;
 import de.maefvfis.gameoverlay.client.gui.CreativeInv;
 import de.maefvfis.gameoverlay.client.gui.GuiChatCustom;
 import de.maefvfis.gameoverlay.client.gui.ModGuiConfig;
+import de.maefvfis.gameoverlay.client.gui.PlayerList;
 import de.maefvfis.gameoverlay.client.settings.Keybindings;
 import de.maefvfis.gameoverlay.reference.Key;
 import de.maefvfis.gameoverlay.utility.LogHelper;
@@ -27,12 +28,22 @@ public class KeyInputEventHandler {
             mc.displayGuiScreen(new CreativeInv(Minecraft.getMinecraft().thePlayer));
             return Key.CREATIVEINV;
         }
+        if (Minecraft.getMinecraft().gameSettings.keyBindPlayerList.getIsKeyPressed())
+        {
+        	Minecraft.getMinecraft().gameSettings.keyBindPlayerList.unPressAllKeys();
+        	Minecraft  mc = Minecraft.getMinecraft();
+            mc.displayGuiScreen(new PlayerList(Minecraft.getMinecraft()));
+            return Key.TEST;
+        }
+        
+        
         return Key.UNKNOWN;
     }
 
     @SubscribeEvent
     public void handleKeyInputEvent(InputEvent.KeyInputEvent event)
     {
+   
         LogHelper.info(getPressedKeybinding());
     }
 }
