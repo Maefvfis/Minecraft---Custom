@@ -32,7 +32,7 @@ public class MainTick {
 		
 		// Render Chunk Info In game
 		if(ConfigurationHandler.myConfigShowItemUsage == true) {
-			new ShowItemUsage();
+			ShowItemUsage.ShowUsage();
 		}
 		
         // Render Mob Grid

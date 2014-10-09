@@ -83,5 +83,42 @@ public class ChunckViewer {
 	public int countEntity(Class<?> instance, Chunk chunk) {
 		return countEntity(instance,chunk,false);
 	}
+	
+	
+	
+	
+	public List<choords> ListEntitysOnChunkChoords(Class<?> instance, Chunk chunk, Boolean IsWither) {
+		List<choords> result = new ArrayList<choords>();
+		for (List entityList : chunk.entityLists) {
+			for (Object o : entityList) {
+				if (instance.isInstance(o)) {
+					if(IsWither && instance.isInstance(o)) {
+						if(((EntitySkeleton) o).getSkeletonType() == 1) {
+							result.add(new choords(MathHelper.floor_double(((EntitySkeleton) o).posX),MathHelper.floor_double(((EntitySkeleton) o).posZ)));
+						}
+					} else if(o instanceof EntityPlayer) {
+						if(!whitelist.contains(((EntityPlayer) o).getCommandSenderName())) {
+							result.add(new choords(MathHelper.floor_double(((EntityPlayer) o).posX),MathHelper.floor_double(((EntityPlayer) o).posZ)));
+						}
+					} else {
+						result.add(new choords(MathHelper.floor_double(((Entity) o).posX),MathHelper.floor_double(((Entity) o).posZ)));
+					}
+				} 
+			}
+		}
+		return result;
+	}
+	public List<choords> ListEntitysOnChunkChoords(Class<?> instance, Chunk chunk) {
+		return ListEntitysOnChunkChoords(instance,chunk,false);
+	}
+	public class choords {
+		public int x;
+		public int z;
+		public choords(int x1, int z1) {
+			this.x = x1;
+			this.z = z1;
+		}
+	}
+	
 		
 }

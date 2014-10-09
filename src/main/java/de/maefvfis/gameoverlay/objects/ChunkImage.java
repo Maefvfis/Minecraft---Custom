@@ -43,6 +43,7 @@ public class ChunkImage {
 		BufferedImage Img = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
 		Graphics2D Graphic;
 		ChunkData ChunkData;
+		
 		for(int i3 = 0; i3 <= 15; i3++) {
 			for(int i4 = 0; i4 <= 15; i4++) {
 				blockY = chunk.getHeightValue(i3, i4);
@@ -58,20 +59,26 @@ public class ChunkImage {
 			}
 		}
 		
-		int TextureID = TextureUtil.uploadTextureImage(TextureUtil.glGenTextures(), Img);
-		//Debug.println("TextureID",""+TextureID);
 		
-		ChunkList.add(new ChunkData(chunk.xPosition,chunk.zPosition,Img,TextureID));
+		int TextureID = TextureUtil.uploadTextureImage(TextureUtil.glGenTextures(), Img);
+		
+		ChunkList.add(new ChunkData(chunk.xPosition,chunk.zPosition,TextureID));
 		
 	}
 	
 	
 	public static void checkBufferSize() {
-		Debug.println(maxChunkBufferSize+"", ChunkList.size()+"");
+		//Debug.println(maxChunkBufferSize+"", ChunkList.size()+"");
 		if(ChunkList.size() > maxChunkBufferSize) {
-			ChunkList.clear();
-			Debug.println("", "Buffer Cleared");
+			deleteBuffer();
 		}
+	}
+	
+	public static void deleteBuffer() {
+		for(ChunkData ChunkD: ChunkList) {
+			TextureUtil.deleteTexture(ChunkD.TextureID);
+		}
+		ChunkList.clear();
 	}
 
 	public static ChunkData getChunkData(int x, int z) {

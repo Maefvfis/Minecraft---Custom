@@ -6,6 +6,7 @@ public final class Names {
         public static final String CATEGORY = "keys.gameoverlay.category";
         public static final String MENU = "keys.gameoverlay.menu";
         public static final String CREATIVEINV = "keys.gameoverlay.creativeinv";
+        public static final String MAPTOGGLE = "keys.gameoverlay.maptoggle";
     }
     
 }

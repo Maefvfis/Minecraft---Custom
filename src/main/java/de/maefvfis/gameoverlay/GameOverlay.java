@@ -7,7 +7,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import de.maefvfis.gameoverlay.client.handler.GridHandler;
 import de.maefvfis.gameoverlay.client.handler.GuiOpenHandler;
 import de.maefvfis.gameoverlay.client.handler.KeyInputEventHandler;
 import de.maefvfis.gameoverlay.client.handler.LightOverlayHandler;
@@ -31,7 +30,6 @@ public class GameOverlay {
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
         FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
         proxy.registerKeyBindings();
-        MinecraftForge.EVENT_BUS.register(new GridHandler());
         MinecraftForge.EVENT_BUS.register(new MainTick());
         MinecraftForge.EVENT_BUS.register(new GuiOpenHandler());
         LogHelper.info("PRE ist durch .........................................");

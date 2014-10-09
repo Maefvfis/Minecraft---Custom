@@ -21,4 +21,18 @@ public class DayTime {
 		return returnStunden + ":" + returnMinuten;
 		
 	}
+	
+	public static boolean getDaytime(Long ltime) {
+	        
+        int Stunden = (int) (((ltime + 6000) % 24000) / 1000);
+        if ((Stunden >= 19) || (Stunden < 6)) {
+            return false;
+        } else {
+            return true;
+        }
+	}
+	
+	
+	
+	
 }

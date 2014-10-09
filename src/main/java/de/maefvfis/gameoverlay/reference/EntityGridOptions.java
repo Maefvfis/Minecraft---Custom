@@ -5,6 +5,7 @@ import java.util.List;
 
 import sun.security.ssl.Debug;
 import de.maefvfis.gameoverlay.handler.ConfigurationHandler;
+import de.maefvfis.gameoverlay.objects.ChunkImage;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySlime;
@@ -42,6 +43,32 @@ public class EntityGridOptions {
 				ActiveEntity = ent;
 			}
 		}
+	}
+	
+	
+	public static void CycleActiveEntity() {
+    			ChunkImage.deleteBuffer();
+				int i = getActiveEntityIndex();
+				if(i == EnitysObj.size()-1) {
+					SetActiveEntity(EnitysObj.get(0).EntityName);
+					ConfigurationHandler.myConfigGridType = EnitysObj.get(0).EntityName;
+				} else {
+					SetActiveEntity(EnitysObj.get(i+1).EntityName);
+					ConfigurationHandler.myConfigGridType = EnitysObj.get(i+1).EntityName;
+				}
+
+				return;
+
+	}
+	
+	public static int getActiveEntityIndex() {
+			for(int i = 0; i < EnitysObj.size(); i++) {
+				if(EnitysObj.get(i).EntityName == ActiveEntity.EntityName) {
+					return i;
+				}
+			}
+			return 0;
+		
 	}
 	
 	public static void SetActiveEntity(Class<?> MobClass) {

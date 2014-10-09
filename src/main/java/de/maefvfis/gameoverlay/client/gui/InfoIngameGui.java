@@ -55,6 +55,9 @@ public class InfoIngameGui extends GuiScreen {
 	
 	public InfoIngameGui() {
 		
+		
+		GL11.glEnable(GL11.GL_BLEND);
+	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		//GL11.glScalef(0.8F,0.8F,0.8F);
 		
 		FontRenderer fontRender =  mc.fontRenderer;
@@ -82,31 +85,6 @@ public class InfoIngameGui extends GuiScreen {
 		String[] splits = mc.debug.split(",");
 		fontRender.drawStringWithShadow(splits[0], 5, currentY,0xffffff);
 		currentY += 10;
-
-		
-		
-		 //draw your Gui here, only thing you need to change is the path
-	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	    
-	    
-	    
-	    
-	    
-	    mc.renderEngine.bindTexture(new ResourceLocation("gameoverlay","textures/moon_phases.png"));
-	    drawTexturedModalRect((screenwidth / 2) - 45 , 5, 0, 400, 90, 40);
-	    int[] MoonTextOff = Mondphasen.getPhase_iconoffset(Minecraft.getMinecraft().theWorld.getMoonPhase());
-	    drawTexturedModalRect((screenwidth / 2) + 21 , 7, MoonTextOff[0] / 2, MoonTextOff[1] / 2, 50, 50);
-	    
-	    int weatheroffset = 0;
-	    
-	    if(mc.theWorld.getWorldInfo().isThundering()) {
-	    	weatheroffset = 96;
-	    } else if (mc.theWorld.getWorldInfo().isRaining()) {
-	    	weatheroffset = 96 * 2;
-	    }
-	    drawTexturedModalRect((screenwidth / 2) - 43 , 7, weatheroffset / 2, (96*2) / 2, 50, 50);
-
-	    fontRender.drawString(DayTime.getTimeString(Minecraft.getMinecraft().theWorld.getWorldInfo().getWorldTime()),(int) (((screenwidth / 2) - fontRender.getStringWidth(DayTime.getTimeString(Minecraft.getMinecraft().theWorld.getWorldInfo().getWorldTime())) / 2)) + 3, 14, 0xffffff);
 
 
 	}

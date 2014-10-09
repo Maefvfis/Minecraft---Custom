@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 
 public class ShowItemUsage {
 
-	private Minecraft mc = Minecraft.getMinecraft();
+	public static Minecraft mc = Minecraft.getMinecraft();
 	
-	public ShowItemUsage() {
+	public static void ShowUsage() {
 		// Show item usage
 		ItemStack currentItem = mc.thePlayer.inventory.getCurrentItem();
 		if (currentItem != null) {
